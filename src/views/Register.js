@@ -1,40 +1,38 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { handleUser } from '../components/Actions/HandleUser'
 import register from '../styles/register/register.module.css'
-import { Input, Label, Button, Col, Container, Form, FormGroup, Row } from 'reactstrap';
 import { useAddNewUserMutation } from '../redux/users/usersApi'
+import { handleChange } from '../components/Actions/HandleChange'
+import { Input, Label, Button, Col, Container, Form, FormGroup, Row } from 'reactstrap';
 
 const Register = () => {
     const [addNewUser] = useAddNewUserMutation()
     const [user, setUser] = useState({
         firstName: '',
+        cPassword: '',
+        password: '',
         lastName: '',
         email: '',
-        password: '',
-        cPassword: '',
         tnc: ''
     })
 
-    const handleChange = (e) => {
-        setUser({ ...user, [e.target.name]: e.target.value })
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        addNewUser(user).then((res) => {
-            console.log(res)
-        }).catch((err) => {
-            console.log(err)
-        })
-        e.target.reset();
-    }
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     addNewUser(user).then((res) => {
+    //         console.log(res)
+    //     }).catch((err) => {
+    //         console.log(err)
+    //     })
+    //     e.target.reset();
+    // }
 
     return (
         <>
             <Container className={register.register}>
                 <Link to='/'>Home</Link>
                 <div className={register.innerForm}>
-                    <Form onSubmit={handleSubmit}
+                    <Form onSubmit={(e) => handleUser(e, user, addNewUser)}
                         style={{ width: '500px', backgroundColor: 'teal', padding: '20px', borderRadius: '7px', color: '#fff' }}>
                         <h4>Register Here</h4>
                         <Row className={register.formTags}>
@@ -45,12 +43,12 @@ const Register = () => {
                                             First Name<span>*</span>
                                         </Label>
                                         <Input
+                                            required
+                                            type="text"
                                             id="firstname"
                                             name="firstName"
                                             placeholder="First Name"
-                                            type="text"
-                                            onChange={handleChange}
-                                            required
+                                            onChange={(e) => handleChange(e, user, setUser)}
                                         />
                                     </FormGroup>
                                 </Col>
@@ -60,12 +58,12 @@ const Register = () => {
                                             Last Name<span>*</span>
                                         </Label>
                                         <Input
+                                            required
+                                            type="text"
                                             id="lastname"
                                             name="lastName"
                                             placeholder="Last Name"
-                                            type="text"
-                                            onChange={handleChange}
-                                            required
+                                            onChange={(e) => handleChange(e, user, setUser)}
                                         />
                                     </FormGroup>
                                 </Col>
@@ -76,12 +74,12 @@ const Register = () => {
                                         Email address<span>*</span>
                                     </Label>
                                     <Input
+                                        required
                                         id="email"
                                         name="email"
-                                        placeholder="Email address"
                                         type="email"
-                                        onChange={handleChange}
-                                        required
+                                        placeholder="Email address"
+                                        onChange={(e) => handleChange(e, user, setUser)}
                                     />
                                 </FormGroup>
                             </Col>
@@ -92,12 +90,12 @@ const Register = () => {
                                             Password<span>*</span>
                                         </Label>
                                         <Input
+                                            required
                                             id="password"
                                             name="password"
-                                            placeholder="Password"
                                             type="password"
-                                            onChange={handleChange}
-                                            required
+                                            placeholder="Password"
+                                            onChange={(e) => handleChange(e, user, setUser)}
                                         />
                                     </FormGroup>
                                 </Col>
@@ -107,12 +105,12 @@ const Register = () => {
                                             Confirm Password<span>*</span>
                                         </Label>
                                         <Input
+                                            required
                                             id="cPassword"
+                                            type="password"
                                             name="cPassword"
                                             placeholder="Confirm Password"
-                                            type="password"
-                                            onChange={handleChange}
-                                            required
+                                            onChange={(e) => handleChange(e, user, setUser)}
                                         />
                                     </FormGroup>
                                 </Col>
@@ -120,12 +118,12 @@ const Register = () => {
                         </Row>
                         <FormGroup check>
                             <Input
+                                required
                                 id="tnc"
                                 name="tnc"
                                 value='true'
                                 type="checkbox"
-                                onChange={handleChange}
-                                required
+                                onChange={(e) => handleChange(e, user, setUser)}
                             />
                             <Label
                                 check
