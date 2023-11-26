@@ -1,14 +1,13 @@
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Routes, Route } from 'react-router-dom'
-import Layouts from './layouts/Layouts';
 import Home from '../src/views/Home'
-import Products from '../src/views/Products';
-import Product from '../src/views/Product';
 import User from '../src/views/User';
-import Profile from '../src/views/Profile'
 import Login from '../src/views/Login'
+import Layouts from './layouts/Layouts';
+import Profile from '../src/views/Profile'
+import Product from '../src/views/Product';
 import Register from '../src/views/Register'
+import Products from '../src/views/Products';
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
   return (

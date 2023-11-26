@@ -4,7 +4,7 @@ import login from '../styles/login/login.module.css'
 import { useLoginUserMutation } from '../redux/users/usersApi'
 import { handleUser } from '../components/Actions/HandleUser'
 import { handleChange } from '../components/Actions/HandleChange'
-import { Container, Form, Label, Col, FormGroup, Input, Button } from 'reactstrap'
+import { Container, Box, TextField, Button } from '@mui/material';
 
 const Login = () => {
     const [loginUser] = useLoginUserMutation()
@@ -28,54 +28,58 @@ const Login = () => {
     // };
 
     return (
-        <Container className='pt-2'>
+        <Container sx={{ py: 2 }}>
             <Link to='/'>Home</Link>
-            <div className={login.login}>
-                <Form onSubmit={(e) => handleUser(e, user, loginUser)}
-                    style={{ backgroundColor: 'teal', padding: '20px', borderRadius: '7px', color: '#fff' }}>
-                    <h4>Login here</h4>
-                    <FormGroup>
-                        <Label
-                            for="email"
-                        >
-                            Email<span>*</span>
-                        </Label>
-                        <Col>
-                            <Input
-                                required
-                                id="email"
-                                name="email"
-                                type="email"
-                                placeholder="Email address"
-                                onChange={(e) => handleChange(e, user, setUser)}
-                            />
-                        </Col>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label
-                            for="password"
-                        >
-                            Password<span>*</span>
-                        </Label>
-                        <Col>
-                            <Input
-                                required
-                                id="password"
-                                name="password"
-                                type="password"
-                                placeholder="Password"
-                                onChange={(e) => handleChange(e, user, setUser)}
-                            />
-                        </Col>
-                    </FormGroup>
-                    <Col className='d-flex' style={{ flexDirection: 'column' }}>
-                        <Button color='primary' className='my-2'>
+            <Box onSubmit={(e) => handleUser(e, user, loginUser)}
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}
+                noValidate
+                autoComplete="off"
+            >
+                <Box component="form"
+                    sx={{
+                        '& .MuiTextField-root': { m: 1, width: '25ch' },
+                        display: 'flex',
+                        borderRadius: 5,
+                        color: '#fff',
+                        flexDirection: 'column',
+                        backgroundColor: 'gray',
+                        py: 15, px: 20
+                    }}>
+                    Login Here
+                    <TextField
+                        required
+                        id="email"
+                        type="email"
+                        label="Email"
+                        variant="standard"
+                        placeholder='Email'
+                        onChange={(e) => handleChange(e, user, setUser)}
+                    />
+                    <TextField
+                        required
+                        id="password"
+                        type="password"
+                        label="Password"
+                        variant="standard"
+                        placeholder='Password'
+                        onChange={(e) => handleChange(e, user, setUser)}
+                    />
+                    <Box >
+                        <Button sx={{
+                            display: 'flex',
+                            flexDirection: 'column'
+                        }}>
                             Login
                         </Button>
                         <span>Don't have an account <Link to='/register'>Register</Link> here.</span>
-                    </Col>
-                </Form>
-            </div>
+                    </Box>
+                </Box>
+            </Box>
         </Container>
     )
 }

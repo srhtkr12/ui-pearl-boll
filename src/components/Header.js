@@ -1,16 +1,15 @@
 import React from 'react'
-import header from '../styles/header/header.module.css'
 import NavBar from '../components/NavBar'
-import { Container, Row } from 'reactstrap'
+import { Container, Box } from '@mui/material';
 
 const Header = () => {
     return (
         <>
             <NavBar />
-            <Container fluid>
-                <Row className={header.header}>
+            <Container>
+                <Box>
                     <div>Scroll Bar</div>
-                </Row>
+                </Box>
             </Container>
         </>
     )
