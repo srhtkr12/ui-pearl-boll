@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { handleUser } from '../components/Actions/HandleUser'
 import { useAddNewUserMutation } from '../redux/users/usersApi'
-import { handleChange } from '../components/Actions/HandleChange'
 import { Container, Box, Button, Typography, TextField, Checkbox } from '@mui/material';
 
 const Register = () => {
@@ -16,20 +14,24 @@ const Register = () => {
         tnc: ''
     })
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     addNewUser(user).then((res) => {
-    //         console.log(res)
-    //     }).catch((err) => {
-    //         console.log(err)
-    //     })
-    //     e.target.reset();
-    // }
+    const handleChange = (e) => {
+        setUser({ ...user, [e.target.name]: e.target.value })
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        addNewUser(user).then((res) => {
+            console.log(res)
+        }).catch((err) => {
+            console.log(err)
+        })
+        e.target.reset();
+    }
 
     return (
         <Container sx={{ py: 2 }}>
             <Link to='/'>Home</Link>
-            <Box onSubmit={(e) => handleUser(e, user, addNewUser)}
+            <Box onSubmit={handleSubmit}
                 sx={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -46,7 +48,7 @@ const Register = () => {
                         borderRadius: 5,
                         color: '#fff',
                         flexDirection: 'column',
-                        backgroundColor: 'gray',
+                        backgroundColor: '#2c387e',
                         py: 15, px: 20
                     }}>
                     <Typography>Register here</Typography>
@@ -58,7 +60,7 @@ const Register = () => {
                         label="First Name"
                         variant="standard"
                         placeholder='First Name'
-                        onChange={(e) => handleChange(e, user, setUser)}
+                        onChange={handleChange}
                     />
                     <TextField
                         required
@@ -68,7 +70,7 @@ const Register = () => {
                         label="Last Name"
                         variant="standard"
                         placeholder='Last Name'
-                        onChange={(e) => handleChange(e, user, setUser)}
+                        onChange={handleChange}
                     />
                     <TextField
                         required
@@ -78,7 +80,7 @@ const Register = () => {
                         label="Email"
                         variant="standard"
                         placeholder='Email'
-                        onChange={(e) => handleChange(e, user, setUser)}
+                        onChange={handleChange}
                     />
                     <TextField
                         required
@@ -88,7 +90,7 @@ const Register = () => {
                         label="Password"
                         variant="standard"
                         placeholder='Password'
-                        onChange={(e) => handleChange(e, user, setUser)}
+                        onChange={handleChange}
                     />
                     <TextField
                         required
@@ -98,16 +100,16 @@ const Register = () => {
                         label="Confirm Password"
                         variant="standard"
                         placeholder='Confirm Password'
-                        onChange={(e) => handleChange(e, user, setUser)}
+                        onChange={handleChange}
                     />
                     <Box>
                         <Checkbox
-                            // onChange={handleChange}
+                            onChange={handleChange}
                             inputProps={{ 'aria-label': 'controlled' }}
                         />
                     </Box>
                     <Box >
-                        <Button sx={{
+                        <Button type='submit' sx={{
                             display: 'flex',
                             flexDirection: 'column'
                         }}>

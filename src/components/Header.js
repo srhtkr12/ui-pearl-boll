@@ -1,17 +1,15 @@
 import React from 'react'
-import NavBar from '../components/NavBar'
-import { Container, Box } from '@mui/material';
+import { Grid } from '@mui/material';
+import NavBar from '../components/Bars/NavBar'
+import MenuBar from '../components/Bars/MenuBar'
 
 const Header = () => {
+    const User = JSON.parse(localStorage.getItem('User'))
+
     return (
-        <>
-            <NavBar />
-            <Container>
-                <Box>
-                    <div>Scroll Bar</div>
-                </Box>
-            </Container>
-        </>
+        <Grid>
+            {User?.email ? <MenuBar /> : <NavBar />}
+        </Grid>
     )
 }
 

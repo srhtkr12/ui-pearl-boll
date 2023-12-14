@@ -1,11 +1,12 @@
 
-export const UserData = [
+export const SalerData = [
     {
         "id": 1,
         "name": "Leanne Graham",
         "username": "Shri Ram",
         "email": "shriram@gmail.com",
         "password": "abcd@123",
+        "gstnumner": "GND23456DF",
         "address": {
             "street": "Kulas Light",
             "suite": "Apt. 556",
@@ -30,6 +31,7 @@ export const UserData = [
         "username": "Antonette",
         "email": "bholenath@gmail.com",
         "password": "abcd@123",
+        "gstnumner": "GND23456DF",
         "address": {
             "street": "Victor Plains",
             "suite": "Suite 879",
@@ -54,6 +56,7 @@ export const UserData = [
         "username": "Samantha",
         "email": "shriganesh@gmail.com",
         "password": "abcd@123",
+        "gstnumner": "GND23456DF",
         "address": {
             "street": "Douglas Extension",
             "suite": "Suite 847",
@@ -78,6 +81,7 @@ export const UserData = [
         "username": "Krishan",
         "email": "shrikrishna@gmail.com",
         "password": "abcd@123",
+        "gstnumner": "GND23456DF",
         "address": {
             "street": "Hoeger Mall",
             "suite": "Apt. 692",
@@ -102,6 +106,7 @@ export const UserData = [
         "username": "Kamren",
         "email": "shrihari@gmail.com",
         "password": "abcd@123",
+        "gstnumner": "GND23456DF",
         "address": {
             "street": "Skiles Walks",
             "suite": "Suite 351",
@@ -126,6 +131,7 @@ export const UserData = [
         "username": "Leopoldo_Corkery",
         "email": "jaimatadi@gmail.com",
         "password": "abcd@123",
+        "gstnumner": "GND23456DF",
         "address": {
             "street": "Norberto Crossing",
             "suite": "Apt. 950",
@@ -150,6 +156,7 @@ export const UserData = [
         "username": "Elwyn.Skiles",
         "email": "shriradhey@gmail.com",
         "password": "abcd@123",
+        "gstnumner": "GND23456DF",
         "address": {
             "street": "Rex Trail",
             "suite": "Suite 280",
@@ -174,6 +181,7 @@ export const UserData = [
         "username": "Maxime_Nienow",
         "email": "jayhanuman@gmail.com",
         "password": "abcd@123",
+        "gstnumner": "GND23456DF",
         "address": {
             "street": "Ellsworth Summit",
             "suite": "Suite 729",
@@ -198,6 +206,7 @@ export const UserData = [
         "username": "Siya Ram",
         "email": "siyaram@gmail.com",
         "password": "abcd@123",
+        "gstnumner": "GND23456DF",
         "address": {
             "street": "Dayna Park",
             "suite": "Suite 449",
@@ -222,6 +231,7 @@ export const UserData = [
         "username": "Moriah.Stanton",
         "email": "rameshwar@gmail.com",
         "password": "abcd@123",
+        "gstnumner": "GND23456DF",
         "address": {
             "street": "Kattie Turnpike",
             "suite": "Suite 198",

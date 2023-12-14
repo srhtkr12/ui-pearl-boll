@@ -1,9 +1,10 @@
 import React from 'react'
+import { Grid } from '@mui/material'
 
 const User = () => {
 
     return (
-        <div>User</div>
+        <Grid>User Settings</Grid>
     )
 }
 

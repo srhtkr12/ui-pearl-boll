@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import MenuBar from '../components/MenuBar'
 import { styled, alpha } from '@mui/material/styles';
-// import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import { AppBar, InputBase, Badge, Box, Toolbar, Menu, MenuItem, IconButton, Typography } from '@mui/material';
+import { AppBar, InputBase, Badge, Box, Toolbar, Menu, MenuItem, IconButton, Typography, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -49,10 +48,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
+const pages = ['Product', 'Women', 'Man', 'Kids'];
+
 const NavBar = () => {
+    const [navBar, setNavBar] = useState(null);
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
+    const handleCloseNavBar = () => {
+        setNavBar(null);
+    };
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -151,22 +156,20 @@ const NavBar = () => {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar>
-                    {/* <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="open drawer"
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
-                    </IconButton> */}
                     <Typography
                         variant="h6"
                         noWrap
-                        component="div"
-                        sx={{ display: { xs: 'none', sm: 'block' } }}
+                        component="a"
+                        href='/'
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'none', md: 'flex' },
+                            fontWeight: 700,
+                            color: 'inherit',
+                            textDecoration: 'none',
+                        }}
                     >
-                        MUI
+                        PB
                     </Typography>
                     <Search>
                         <SearchIconWrapper>
@@ -177,33 +180,46 @@ const NavBar = () => {
                             inputProps={{ 'aria-label': 'search' }}
                         />
                     </Search>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                        <Menu>
+                            <MenuItem onClick={handleCloseNavBar}>
+                                {pages.map((page) => {
+                                    return (
+                                        <Typography key={page} textAlign="center">
+                                            {page}
+                                        </Typography>
+                                    )
+                                })}
+                            </MenuItem>
+                        </Menu>
+                    </Box>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                        {pages.map((page) => (
+                            <Button
+                                key={page}
+                                onClick={handleCloseNavBar}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                <Link to={`apps/${page.toLowerCase()}`} style={{ color: 'white', textDecoration: 'none' }}>{page}</Link>
+                            </Button>
+                        ))}
+                    </Box>
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                            <Badge badgeContent={4} color="error">
-                                <MailIcon />
-                            </Badge>
-                        </IconButton>
-                        <IconButton
-                            size="large"
-                            aria-label="show 17 new notifications"
-                            color="inherit"
+                        <Typography
+                            component="a"
+                            href="/login"
+                            sx={{
+                                px: 1,
+                                fontFamily: 'monospace',
+                                fontWeight: 700,
+                                fontSize: '1.2rem',
+                                color: 'inherit',
+                                textDecoration: 'none',
+                            }}
                         >
-                            <Badge badgeContent={17} color="error">
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton>
-                        <IconButton
-                            size="large"
-                            edge="end"
-                            aria-label="account of current user"
-                            aria-controls={menuId}
-                            aria-haspopup="true"
-                            onClick={handleProfileMenuOpen}
-                            color="inherit"
-                        >
-                            <AccountCircle />
-                        </IconButton>
+                            Login
+                        </Typography>
                     </Box>
                     <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
@@ -218,10 +234,7 @@ const NavBar = () => {
                         </IconButton>
                     </Box>
                 </Toolbar>
-                <MenuBar />
             </AppBar>
-            {renderMobileMenu}
-            {renderMenu}
         </Box>
     )
 }

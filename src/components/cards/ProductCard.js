@@ -19,7 +19,7 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-const ProductCard = ({ 
+const ProductCard = ({
     itemId,
     title,
     price,
@@ -40,7 +40,7 @@ const ProductCard = ({
 
     return (
         <Card sx={{ maxWidth: 345 }}>
-            <Link to={`/apps/products/product/${itemId}`}>
+            <Link to={`/apps/product/details/${itemId}`}>
                 <CardHeader
                     avatar={
                         <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -59,7 +59,7 @@ const ProductCard = ({
                     component="img"
                     height="194"
                     image={thumbnail}
-                    alt="Paella dish"
+                    alt="title"
                 />
             </Link>
             <CardContent>

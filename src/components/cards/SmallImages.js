@@ -9,8 +9,8 @@ const SmallImages = ({ images }) => {
                 flexDirection: 'column',
                 gap: 1
             }}>
-                {images.map((image) => (
-                    <Card sx={{ maxWidth: '100px', maxHeight: '100px' }}>
+                {images.map((image, i) => (
+                    <Card key={i} sx={{ maxWidth: '100px', maxHeight: '100px' }}>
                         <CardMedia
                             component="img"
                             width='100'

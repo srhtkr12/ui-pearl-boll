@@ -1,13 +1,34 @@
 import React from 'react'
-import home from '../styles/home/home.module.css'
+import { Grid, Box } from '@mui/material'
+import BigCards from '../components/Cards/BigCards'
+import SmallCards from '../components/Cards/SmallCards'
+import MediumCards from '../components/Cards/MediumCards'
+import Crousels from '../components/Crousel/Crousels'
+
 
 const Home = () => {
-
   return (
-    <div className={home.home}>
-      <h1>Home</h1>
-      <h1>Hello Team</h1>
-    </div>
+    <Grid sx={{
+      p: 0, m: 0, px: 0.5, pt: 0.5,
+      backgroundColor: 'ghostwhite',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+    }}>
+      <Crousels />
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'center',
+      }}>
+        <MediumCards />
+      </Box>
+      <Box>
+        <BigCards />
+      </Box>
+      <Box>
+        <SmallCards />
+      </Box>
+    </Grid>
   )
 }
 

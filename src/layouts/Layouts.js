@@ -1,15 +1,12 @@
-import { Container } from '@mui/material';
-import { Outlet } from "react-router-dom";
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import { Outlet } from "react-router-dom";
 
 const Layouts = () => {
     return (
         <>
             <Header />
-            <Container fluid>
-                <Outlet />
-            </Container>
+            <Outlet />
             <Footer />
         </>
     )
