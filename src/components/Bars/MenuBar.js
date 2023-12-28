@@ -134,7 +134,7 @@ const MenuBar = () => {
                                 vertical: 'top',
                                 horizontal: 'left',
                             }}
-                            open={Boolean(navBar)}
+                            open={Boolean(navBar) || false}
                             onClose={handleCloseNavBar}
                             sx={{
                                 display: { xs: 'block', md: 'none' },

@@ -14,8 +14,9 @@ import AspectRatio from '@mui/joy/AspectRatio';
 import CardContent from '@mui/joy/CardContent';
 
 import SendIcon from '@mui/icons-material/Send';
-import GitHubIcon from '@mui/icons-material/GitHub';
 import ListItemButton from '@mui/joy/ListItemButton';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
 import ColorLensRoundedIcon from '@mui/icons-material/ColorLensRounded';
 
@@ -23,14 +24,12 @@ function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © '}
-            <Link color="inherit" href="#">
-                Pearl Boll
-            </Link>{' '}
-            {new Date().getFullYear()}
+            Piggibag{' '}
+            {2021}
             {'.'}
         </Typography>
     );
-}
+    }
 
 export const Footer = () => {
     const [color, setColor] = useState('neutral');
@@ -67,7 +66,10 @@ export const Footer = () => {
                     <FacebookRoundedIcon />
                 </IconButton>
                 <IconButton variant="plain">
-                    <GitHubIcon />
+                    <InstagramIcon />
+                </IconButton>
+                <IconButton variant="plain">
+                    <WhatsAppIcon />
                 </IconButton>
                 <Input
                     variant="soft"
@@ -111,8 +113,8 @@ export const Footer = () => {
                         <img alt="" src="/static/blog/mui-product-comparison/ecosystem.png" />
                     </AspectRatio>
                     <CardContent>
-                        <Typography level="body-sm">Intro to the MUI ecosystem</Typography>
-                        <Typography level="body-xs">Blog post</Typography>
+                        <Typography level="body-sm">Piggibag for all your fashion needs.</Typography>
+                        {/* <Typography level="body-xs">Blog post</Typography> */}
                     </CardContent>
                 </Card>
                 <List

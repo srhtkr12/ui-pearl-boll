@@ -1,7 +1,7 @@
 import React from 'react'
 import { Outlet, Navigate } from 'react-router-dom';
 import { Box, Container, Grid, Typography } from '@mui/material'
-const isAuth = { user: false, seller: true };
+const isAuth = { user: false, seller: true, admin: false };
 
 // ---------User---------
 export const UserProtectedRoute = ({ children }) => {
@@ -43,5 +43,14 @@ export const SellerProtectedRoute = ({ children }) => {
     <Outlet />
   ) : (
     <Navigate to="/seller/login" />
+  );
+};
+
+// ---------Admin ---------
+export const AdminProtectedRoute = ({ children }) => {
+  return isAuth.admin ? (
+    <Outlet />
+  ) : (
+    <Navigate to="/admin/login" />
   );
 };

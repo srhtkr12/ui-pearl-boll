@@ -12,18 +12,18 @@ import Profile from '../views/usersView/Profile';
 import Addresses from '../views/paymentView/Addresses';
 import Checkout from '../views/paymentView/Checkout';
 import PayMethods from '../views/paymentView/PaymentMode';
-import Shipping from '../views/productsView/Shipping';
-import TrackOrder from '../views/productsView/TrackOrder';
+import Shipping from '../views/orderView/Shipping';
+import TrackOrder from '../views/orderView/TrackOrder';
 import Category from '../views/productsView/CategoryPage';
 import AllProducts from '../views/productsView/AllProducts';
 import ReturnPage from '../views/productsView/ProductReturn';
-import OrderDetails from '../views/productsView/OrderDetails';
-import OrderHistory from '../views/productsView/OrderHistory';
+import OrderDetails from '../views/orderView/OrderDetails';
+import OrderHistory from '../views/orderView/OrderHistory';
 import ProfileSettings from '../views/usersView/ProfileSettings';
 import PaymentSetting from '../views/paymentView/PaymentSetting';
 import ProductDetails from '../views/productsView/ProductDetails';
-import OrderConfirmation from '../views/productsView/OrderConfirmation';
-
+import OrderConfirmation from '../views/orderView/OrderConfirmation';
+// Seller
 import Seller from '../views/sellerView/Seller'
 import Welcome from '../views/sellerView/Welcome'
 import AddProduct from '../views/sellerView/AddProduct'
@@ -31,11 +31,18 @@ import SellerHome from '../views/sellerView/SellerHome'
 import SellerLogin from '../views/sellerView/SellerLogin'
 import SellerDetails from '../views/sellerView/SellerDetails'
 import SellerPayment from '../views/sellerView/SellerPayment'
-import SellerProducts from '../views/sellerView/SellerProducts'
+import SellerInventory from '../views/sellerView/SellerInventories'
 import SellerRegister from '../views/sellerView/SellerRegister'
-
+import SellerProductsDetail from '../views/sellerView/SellerProductsDetail'
+// Admin
+import Admin from '../views/adminView/Admin'
+import Dashboard from '../views/adminView/Dashboard'
+import AdminDetails from '../views/adminView/AdminDetails'
+import AdminPayment from '../views/adminView/AdminPayments'
+import AdminInventory from '../views/adminView/AdminInventory'
 // Protected Routes
 import { UserProtectedRoute } from './ProtectedRoute';
+import { AdminProtectedRoute } from './ProtectedRoute';
 import { OrderProtectedRoute } from './ProtectedRoute';
 import { SellerProtectedRoute } from './ProtectedRoute';
 import { PaymentProtectedRoute } from './ProtectedRoute';
@@ -59,7 +66,7 @@ export const router = createBrowserRouter(
                 <Route index element={<Home />} />
                 <Route path='category' element={<Category />} />
                 <Route path='apps/product' element={<AllProducts />} />
-                <Route path='details/:id' element={<ProductDetails />} />
+                <Route path='apps/product/:id' element={<ProductDetails />} />
 
                 {/* Users */}
                 <Route path='apps/user' element={<User />} >
@@ -89,10 +96,22 @@ export const router = createBrowserRouter(
             <Route element={<SellerProtectedRoute />} >
                 <Route path='apps/seller' element={<Seller />} >
                     <Route index element={<SellerHome />} />
-                    <Route path='add' element={<AddProduct />} />
-                    <Route path='details' element={<SellerDetails />} />
+                    <Route path='action' element={<AddProduct />} />
+                    <Route path='profile' element={<SellerDetails />} />
                     <Route path='payments' element={<SellerPayment />} />
-                    <Route path='products' element={<SellerProducts />} />
+                    <Route path='inventory' element={<SellerInventory />} />
+                    <Route path='inventory/action/:id' element={<AddProduct />} />
+                    <Route path='inventory/:id' element={<SellerProductsDetail />} />
+                </Route>
+            </Route>
+            {/* Admin */}
+            <Route element={<AdminProtectedRoute />} >
+                <Route path='apps/admin' element={<Admin />} >
+                    <Route index element={<SellerHome />} />
+                    <Route path='dashboard' element={<Dashboard />} />
+                    <Route path='profile' element={<AdminDetails />} />
+                    <Route path='payments' element={<AdminPayment />} />
+                    <Route path='inventory' element={<AdminInventory />} />
                 </Route>
             </Route>
             <Route path='*' element={<PNF />} />

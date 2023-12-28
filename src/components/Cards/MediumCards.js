@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Grid, Card, CardMedia } from '@mui/material'
-import { useGetAllProductsQuery } from '../../redux/products/productApi'
+import { useGetAllProductsQuery } from '../../redux/products/productsApi'
 
 const MediumCards = () => {
     const [products, setProducts] = useState([])

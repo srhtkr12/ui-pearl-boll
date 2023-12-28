@@ -1,32 +1,61 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Box, Grid } from '@mui/material'
+import { Box, Divider, Grid } from '@mui/material'
+import { SideNav } from '../../navigations/SellerNavigates'
+import { Contacts } from '../../navigations/SellerNavigates'
 
-const SalerSidebar = () => {
+const SellerSidebar = () => {
     return (
-        <Grid xs={2} sx={{
+        <Grid item xs={2} sx={{
+            p: 1,
             display: 'flex',
             justifyContent: 'center',
-            minHeight: '100%',
-            backgroundColor: '#6699CC'
+            maxHeight: '100vh',
         }}>
             <Box sx={{
-                py: 4,
+                py: 3,
+                minWidth: '100%',
+                maxHeight: '100vh',
                 display: 'flex',
+                alignItems: 'center',
                 flexDirection: 'column',
                 gap: 3,
                 fontSize: 20,
                 color: '#fff',
-                textDecoration: 'none'
+                textDecoration: 'none',
+                backgroundColor: '#6699CC'
             }}>
-                <Link to={'/apps/seller'}>Home</Link>
-                <Link to={'/apps/seller/profile'}>Profile</Link>
-                <Link>Products</Link>
-                <Link>SalerSidebar</Link>
-                <Link>SalerSidebar</Link>
+                <Box>
+                    Seller Logo
+                </Box>
+                <Divider />
+                <Box sx={{
+                    textDecoration: 'none',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 2,
+                }}>
+                    {SideNav.map((item) => (
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            {item.icon}
+                            <Link textDecoration={'none'} to={item.path}> {item.title}</Link>
+                        </Box>
+                    ))}
+                </Box>
+                <Divider />
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    {
+                        Contacts.map((item) => (
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                {item.icon}
+                                <Link textDecoration={'none'} to={item.path}> {item.title}</Link>
+                            </Box>
+                        ))
+                    }
+                </Box>
             </Box>
         </Grid>
     )
 }
 
-export default SalerSidebar
+export default SellerSidebar

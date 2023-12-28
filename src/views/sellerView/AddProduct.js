@@ -1,180 +1,191 @@
-import React, { useState } from 'react';
-import { useAddNewSalerMutation } from '../../redux/salers/salersApi'
-import { Box, Button, Typography, TextField, Grid } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { regexes } from '../../components/Regexes/Regexes';
+import { Box, Button, Typography, Grid, Divider } from '@mui/material';
+import { ImageCard } from '../../components/FormComponents/ImageInputs';
+import { useCreateProductMutation, useGetProductByIdQuery, useEditProductMutation } from '../../redux/products/productsApi'
+import { DropDownList } from '../../components/FormComponents/DropDownList'
+import { TextInputFields } from '../../components/FormComponents/TextInputFields'
+import { MultipleSelectCheckmarks } from '../../components/FormComponents/MultiSelectChecks'
 
-const Register = () => {
-    const [addNewSaler] = useAddNewSalerMutation()
+const AddProduct = () => {
+    const { id } = useParams()
+    const navigate = useNavigate()
+
+    const { data } = useGetProductByIdQuery(id)
+    const [editProduct] = useEditProductMutation()
+    const [createProduct] = useCreateProductMutation()
     const [product, setProduct] = useState({
-        title: "",
-        description: "",
-        price: 0,
-        discount: 0,
+        product_Type: '',
+        size: [],
         stock: 0,
-        brand: "",
-        size: '',
+        brand: '',
+        title: '',
+        subTitle: '',
+        price: 0,
         fabric: '',
-        category: "",
-        thumbnail: "",
-        images: ''
+        discount: 0,
+        category: '',
+        product_Code: '',
+        description: '',
+        // thumbnail: "https://i.dummyjson.com/data/products/4/thumbnail.jpg",
+        // images: ["https://i.dummyjson.com/data/products/4/1.jpg",
+        // "https://i.dummyjson.com/data/products/4/2.jpg",
+        // "https://i.dummyjson.com/data/products/4/3.jpg",
+        // "https://i.dummyjson.com/data/products/4/4.jpg",
+        // "https://i.dummyjson.com/data/products/4/thumbnail.jpg"]
     })
+
+    useEffect(() => {
+        if (id && data) {
+            setProduct(data)
+        }
+    }, [id, data])
 
     const handleChange = (e) => {
         setProduct({ ...product, [e.target.name]: e.target.value })
     }
 
-    const handleAddProduct = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        addNewSaler(product).then((res) => {
-            console.log(res)
-        }).catch((err) => {
-            console.log(err)
-        })
-        e.target.reset();
+        if (id && data) {
+            await editProduct({ id, ...product }).then((res) => {
+                if (res.data.status === 200) {
+                    navigate(`/apps/seller/inventory`)
+                    e.target.reset();
+                }
+            }).catch((err) => {
+                console.log(err)
+            })
+        } else {
+            await createProduct(product).then((res) => {
+                if (res.data.status === 201) {
+                    navigate(`/apps/seller/inventory`)
+                    e.target.reset();
+                }
+            }).catch((err) => {
+                console.log(err)
+            })
+        }
     }
 
     return (
         <Grid sx={{
-            p: 4,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: '#6699CC',
+            p: 1,
+            minWidth: '100%',
             minHeight: '100%',
-            flexDirection: 'column'
+            display: 'flex',
+            justifyContent: 'center'
         }} >
-
             <Box component="form"
-                onSubmit={handleAddProduct}
+                onSubmit={handleSubmit}
                 sx={{
+                    p: 4,
+                    m: 0,
                     display: 'flex',
-                    borderRadius: 5,
+                    justifyContent: 'center',
                     color: '#fff',
-                    flexDirection: 'row',
-                    overflowWrap: 'wrap'
-
+                    flexDirection: 'column',
+                    backgroundColor: '#6699CC',
+                    gap: 2,
                 }}>
-                <Typography>Add Product</Typography>
-                <TextField
-                    required
-                    id="title"
-                    name='title'
-                    type="text"
-                    label="Product Type"
-                    variant="standard"
-                    placeholder='Product Type'
-                    onChange={handleChange}
-                />
-                <TextField
-                    required
-                    id="title"
-                    name='title'
-                    type="text"
-                    label="Caretory"
-                    variant="standard"
-                    placeholder='Caretory'
-                    onChange={handleChange}
-                />
-                <TextField
-                    required
-                    id="title"
-                    name='title'
-                    type="text"
-                    label="Product Name"
-                    variant="standard"
-                    placeholder='Product Name'
-                    onChange={handleChange}
-                />
-                <TextField
-                    required
-                    id="title"
-                    name='title'
-                    type="text"
-                    label="Product Code"
-                    variant="standard"
-                    placeholder='Product Code'
-                    onChange={handleChange}
-                />
-                <TextField
-                    required
-                    id="description"
-                    name='description'
-                    type="text"
-                    label="Description"
-                    variant="standard"
-                    placeholder='Description'
-                    onChange={handleChange}
-                />
-                <TextField
-                    required
-                    id="price"
-                    name='price'
-                    type="text"
-                    label="Price"
-                    variant="standard"
-                    placeholder='Price'
-                    onChange={handleChange}
-                />
-                <TextField
-                    required
-                    id="discount"
-                    name='discount'
-                    type="password"
-                    label="Discount"
-                    variant="standard"
-                    placeholder='Discount'
-                    onChange={handleChange}
-                />
-                <TextField
-                    required
-                    id="stock"
-                    name='stock'
-                    type="text"
-                    label="Stock"
-                    variant="standard"
-                    placeholder='Stock'
-                    onChange={handleChange}
-                />
-                <TextField
-                    required
-                    id="brand"
-                    name='brand'
-                    type="text"
-                    label="Brand"
-                    variant="standard"
-                    placeholder='Brand'
-                    onChange={handleChange}
-                />
-                <TextField
-                    required
-                    id="size"
-                    name='size'
-                    type="text"
-                    label="Size"
-                    variant="standard"
-                    placeholder='Size'
-                    onChange={handleChange}
-                />
-                <TextField
-                    required
-                    id="fabric"
-                    name='fabric'
-                    type="text"
-                    label="Fabric"
-                    variant="standard"
-                    placeholder='Fabric'
-                    onChange={handleChange}
-                />
+                <Typography variant='h5'>{id ? 'EDIT' : 'ADD'} PRODUCT</Typography>
+                <Divider />
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 1 }}>
+                    {
+                        Object.keys(product).map((item) => {
+                            if (item === 'size') {
+                                return (
+                                    <MultipleSelectCheckmarks
+                                        key={item}
+                                        id={item}
+                                        name={item}
+                                        label={item}
+                                        labelId={item}
+                                        multiple={true}
+                                        defaultValue={''}
+                                        value={product[item]}
+                                        handleChange={handleChange}
+                                    />
+                                )
+                            } else if (item === 'product_Type') {
+                                return (
+                                    <DropDownList
+                                        key={item}
+                                        id={item}
+                                        name={item}
+                                        label={item}
+                                        labelId={item}
+                                        multipSelect={false}
+                                        placeholder={item}
+                                        value={product[item]}
+                                        handleChange={handleChange}
+                                    />
+                                )
+                            } else {
+                                if (item !== 'thumbnail' &&
+                                    item !== 'createdAt' &&
+                                    item !== 'updatedAt' &&
+                                    item !== 'images' &&
+                                    item !== '__v' &&
+                                    item !== '_id') {
+                                    return (
+                                        <TextInputFields
+                                            required
+                                            fullWidth
+                                            id={item}
+                                            key={item}
+                                            name={item}
+                                            value={product[item]}
+                                            multiline={item === 'description' ? true : false}
+                                            rows={item === 'description' ? 3 : 0}
+                                            label={item}
+                                            placeholder={item}
+                                            handleChange={handleChange}
+                                            type={item === 'price' ||
+                                                item === 'discount' ||
+                                                item === 'stock' ? 'number' : 'text'}
+                                        />
+                                    )
+                                }
+
+                            }
+                        })
+                    }
+                </Box>
+                {/* <Box key={product.title} sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
+                    <Box>
+                        <ImageCard
+                            width={100}
+                            height={100}
+                            alt={product.title}
+                            id={product.thumbnail}
+                            image={product.thumbnail}
+                        />
+                    </Box>
+                    <Box sx={{ display: 'flex', gap: 1 }}>{
+                        product.images.map((img, i) => (
+                            <ImageCard
+                                key={i}
+                                alt={i}
+                                image={img}
+                                width={100}
+                                height={100}
+                            />
+                        ))
+                    }</Box>
+                </Box> */}
+
+                <Divider />
+                <Box >
+                    <Button type='submit' variant="contained">{id ? 'Edit' : 'Add'} Product</Button>{' '}
+                    <Button variant="secondary" onClick={() => navigate('/apps/seller/inventory')} >
+                        Discard
+                    </Button>
+                </Box>
             </Box>
-            <Box >
-                <Button type='submit' >
-                    Add Product
-                </Button>
-                <Button to='/' >
-                    Discard
-                </Button>
-            </Box>
-        </Grid>
+        </Grid >
     )
 }
 
-export default Register
+export default AddProduct;

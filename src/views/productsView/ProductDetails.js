@@ -1,16 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { allProducts } from '../../JsonData/ProductsData';
 import SmallImages from '../../components/Cards/SmallImages';
+import { useGetAllProductsQuery } from '../../redux/products/productsApi';
 import { Grid, Box, Card, CardMedia, Button, Typography, CardContent } from '@mui/material';
 
 const Product = () => {
     const { id } = useParams()
 
+    const [products, setProducts] = useState([])
+    const { data, isLoading, isError } = useGetAllProductsQuery();
+
+    useEffect(() => {
+        setProducts(data)
+    }, [data])
+
+
+    const handleEdit = (e) => {
+        console.log()
+    }
+
+    const handleDelete = (e) => {
+
+    }
+
     return (
         <Grid>
-            {allProducts?.map((product) => (
-                (product.id.toString() === id) && (
+            {products?.map((product) => (
+                (product._id === id) && (
                     <Grid sx={{
                         display: 'flex',
                         flexDirection: 'row',

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { styled, alpha } from '@mui/material/styles';
-import SearchIcon from '@mui/icons-material/Search';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import MoreIcon from '@mui/icons-material/MoreVert';
-import { AppBar, InputBase, Badge, Box, Toolbar, Menu, MenuItem, IconButton, Typography, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import MailIcon from '@mui/icons-material/Mail';
+import SearchIcon from '@mui/icons-material/Search';
+import MoreIcon from '@mui/icons-material/MoreVert';
+import { styled, alpha } from '@mui/material/styles';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import { AppBar, InputBase, Badge, Box, Toolbar, Menu, MenuItem, IconButton, Typography, Button } from '@mui/material';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -92,7 +92,7 @@ const NavBar = () => {
                 vertical: 'top',
                 horizontal: 'right',
             }}
-            open={isMenuOpen}
+            open={isMenuOpen || false}
             onClose={handleMenuClose}
         >
             <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
@@ -114,7 +114,7 @@ const NavBar = () => {
                 vertical: 'top',
                 horizontal: 'right',
             }}
-            open={isMobileMenuOpen}
+            open={isMobileMenuOpen || false}
             onClose={handleMobileMenuClose}
         >
             <MenuItem>

@@ -6,7 +6,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Card, CardHeader, CardMedia, CardContent, CardActions, Collapse, Avatar, IconButton, Typography } from '@mui/material';
+import { Card, CardHeader, CardMedia, CardContent, CardActions, Collapse, Avatar, IconButton, Typography, Grid, Box } from '@mui/material';
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -20,12 +20,13 @@ const ExpandMore = styled((props) => {
 }));
 
 const ProductCard = ({
-    itemId,
+    path,
     title,
     price,
     stock,
     brand,
     rating,
+    itemId,
     images,
     thumbnail,
     category,
@@ -39,8 +40,8 @@ const ProductCard = ({
     };
 
     return (
-        <Card sx={{ maxWidth: 345 }}>
-            <Link to={`/apps/product/details/${itemId}`}>
+        <Card sx={{ m: 0, p: 0, minWidth: '100%', minHeight: '100%' }}>
+            <Link to={`/apps/${path}/${itemId}`}>
                 <CardHeader
                     avatar={
                         <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -57,6 +58,7 @@ const ProductCard = ({
                 />
                 <CardMedia
                     component="img"
+                    width="100%"
                     height="194"
                     image={thumbnail}
                     alt="title"

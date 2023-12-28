@@ -2,22 +2,22 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { axiosApi } from '../../helper/axios';
 import { toast } from "react-toastify";
 
-export const usersApi = createApi({
-    reducerPath: 'usersApi',
+export const sellersApi = createApi({
+    reducerPath: 'sellersApi',
     baseQuery: fetchBaseQuery({ baseUrl: axiosApi.local.defaults.baseURL }),
     endpoints: (builder) => ({
-        // Get All Users
-        getAllUsers: builder.query({
-            query: () => `users`,
+        // Get All Sellers
+        getAllSellers: builder.query({
+            query: () => `sellers`,
         }),
-        // Get USer By ID
-        getUserById: builder.query({
-            query: (id) => `users/${id}`,
+        // Get Seller By ID
+        getSellerById: builder.query({
+            query: (id) => `sellers/${id}`,
         }),
-        // Add New User
-        addNewUser: builder.mutation({
+        // Add New Sellers
+        addNewSeller: builder.mutation({
             query: (payload) => ({
-                url: 'users/register',
+                url: 'sellers/register',
                 method: 'POST',
                 body: payload,
                 headers: {
@@ -25,27 +25,27 @@ export const usersApi = createApi({
                 },
             }),
         }),
-        // Login User
-        loginUser: builder.mutation({
+        // Seller Login
+        loginSeller: builder.mutation({
             query: (credentials) => ({
-                url: 'users/login',
+                url: 'seller/login',
                 method: 'POST',
                 body: credentials,
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
                 },
             }),
-            onSuccess: (data, variables, context) => {
-                toast.success('Logged in successfully.')
+            onSuccess: (message) => {
+                toast.success('Login successful!');
             },
-            onError: (error, variables, context) => {
-                toast.error('Login Failed!')
+            onError: (error) => {
+                toast.error(`Login failed: ${error.message}`);
             },
         }),
-        // Edit User
-        editUser: builder.mutation({
+        // Edit Seller
+        editSeller: builder.mutation({
             query: ({ id, ...payload }) => ({
-                url: `users/edit/${id}`,
+                url: `seller/edit/${id}`,
                 method: 'PATCH',
                 body: payload,
                 headers: {
@@ -53,22 +53,22 @@ export const usersApi = createApi({
                 },
             }),
         }),
-        // Delete User
-        deleteUser: builder.mutation({
+        // Delete Seller
+        deleteSeller: builder.mutation({
             query: (id) => ({
-                url: `users/delete/${id}`,
-                method: 'DELETE',
+                url: `seller/delete/${id}`,
+                method: 'DELETE'
             }),
         }),
     }),
 });
 
 export const {
-    useGetAllUsersQuery,
-    useGetUserByIdQuery,
-    useEditUserMutation,
-    useLoginUserMutation,
-    useDeleteUserMutation,
-    useAddNewUserMutation,
-} = usersApi;
+    useGetAllSellersQuery,
+    useGetSellerByIdQuery,
+    useAddNewSellerMutation,
+    useLoginSellerMutation,
+    useEditSellerMutation,
+    useDeleteSellerMutation
+} = sellersApi;
 
