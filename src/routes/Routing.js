@@ -47,8 +47,13 @@ import { OrderProtectedRoute } from './ProtectedRoute';
 import { SellerProtectedRoute } from './ProtectedRoute';
 import { PaymentProtectedRoute } from './ProtectedRoute';
 
+// import { ToastContainer } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+
 export const router = createBrowserRouter(
     createRoutesFromElements(
+
+        // <ToastContainer />
         <Route>
             {/* Default Pages */}
             <Route path='login' element={<Login />} />

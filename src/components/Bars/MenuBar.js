@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
-import AdbIcon from '@mui/icons-material/Adb';
+import Logo from '../../assets/pb-logo.jpg'
+// import AdbIcon from '@mui/icons-material/Adb';
 import MenuIcon from '@mui/icons-material/Menu';
-import CartIcon from '@mui/icons-material/LocalGroceryStore';
 import MailIcon from '@mui/icons-material/Mail';
+import { AuthService } from '../../helper/jwsStore'
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
+import CartIcon from '@mui/icons-material/LocalGroceryStore';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { AppBar, InputBase, Container, Box, Toolbar, Menu, Button, Tooltip, MenuItem, Avatar, IconButton, Typography, Badge } from '@mui/material';
+import { AppBar, InputBase, Container, Box, Toolbar, Menu, Button, Tooltip, MenuItem, Avatar, IconButton, Typography, Badge, Card, CardMedia } from '@mui/material';
+import { useGetUserByIdQuery } from '../../redux/users/usersApi';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -52,12 +55,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const pages = ['Product', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Settings', 'Dashboard', 'Logout'];
 
-const MenuBar = () => {
-    const User = JSON.parse(localStorage.getItem('User'))
-
+const MenuBar = ({ user }) => {
     const navigate = useNavigate()
     const [navBar, setNavBar] = useState(null);
     const [userMenu, setUserMenu] = useState(null);
+
+    const { data } = useGetUserByIdQuery(user)
 
     const handleOpenNavBar = (e) => {
         setNavBar(e.currentTarget);
@@ -75,7 +78,7 @@ const MenuBar = () => {
     };
 
     const Logout = () => {
-        localStorage.removeItem('User');
+        AuthService.logout()
         navigate('/login')
     }
 
@@ -83,9 +86,20 @@ const MenuBar = () => {
         <AppBar position="static" sx={{ backgroundColor: 'black', boxShadow: 'none' }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+                    <Link to={`/`}>
+                        <Card sx={{ mr: 1, width: '40px', height: '40px', borderRadius: '50%', display: 'flex' }}>
+                            <CardMedia
+                                component="img"
+                                width='100%'
+                                height='100%'
+                                image={Logo}
+                                alt={Logo}
+                            />
+                        </Card>
+                    </Link>
                     <Typography
-                        variant="h6"
+                        variant="h5"
                         noWrap
                         component="a"
                         href="/"
@@ -94,12 +108,11 @@ const MenuBar = () => {
                             display: { xs: 'none', md: 'flex' },
                             fontFamily: 'monospace',
                             fontWeight: 700,
-                            letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        Piggibag
                     </Typography>
                     <Search>
                         <SearchIconWrapper>
@@ -150,27 +163,7 @@ const MenuBar = () => {
                                 })}
                             </MenuItem>
                         </Menu>
-
                     </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component="a"
-                        href="#"
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        LOGO
-                    </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
                             <Button
@@ -230,7 +223,7 @@ const MenuBar = () => {
                                 <NotificationsIcon />
                             </Badge>
                         </Typography>
-                        Hi, {User.username}
+                        Hi, {data?.first_name}
                         <Tooltip title="Open settings" sx={{ ml: -2 }}>
                             <IconButton onClick={handleOpenUserMenu} >
                                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />

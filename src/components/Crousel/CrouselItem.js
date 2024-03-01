@@ -4,22 +4,21 @@ import { Link, Paper, CardMedia, Card } from '@mui/material'
 const CrouselItem = ({ name, url }) => {
 
     return (
-        <Paper sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 1,
-            // height: 400
-        }}>
+        <Paper>
             <Link to={`/apps/product/details`}>
-                <Card borderRadius={5}>
+                <Card borderRadius={4} sx={{
+                    width: '100%', height: '60vh',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover'
+                }}>
                     <CardMedia
                         component="img"
                         width='100%'
-                        height='400vh'
+                        height='100%'
                         borderRadius={5}
                         image={url}
                         alt={name}
-                        sx={{ borderRadius: 2 }}
                     />
                 </Card>
             </Link>

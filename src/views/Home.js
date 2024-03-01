@@ -1,9 +1,9 @@
 import React from 'react'
 import { Grid, Box } from '@mui/material'
 import BigCards from '../components/Cards/BigCards'
+import Crousels from '../components/Crousel/Crousels'
 import SmallCards from '../components/Cards/SmallCards'
 import MediumCards from '../components/Cards/MediumCards'
-import Crousels from '../components/Crousel/Crousels'
 
 
 const Home = () => {

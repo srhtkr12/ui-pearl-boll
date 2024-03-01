@@ -8,6 +8,8 @@ const Products = () => {
     const [products, setProducts] = useState([])
     const { data, isLoading, isError } = useGetAllProductsQuery();
 
+    console.log('data', data)
+
     useEffect(() => {
         setProducts(data)
     }, [data])

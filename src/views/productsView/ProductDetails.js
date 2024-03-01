@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import SmallImages from '../../components/Cards/SmallImages';
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import { useGetAllProductsQuery } from '../../redux/products/productsApi';
 import { Grid, Box, Card, CardMedia, Button, Typography, CardContent } from '@mui/material';
 
@@ -14,7 +15,6 @@ const Product = () => {
         setProducts(data)
     }, [data])
 
-
     const handleEdit = (e) => {
         console.log()
     }
@@ -27,7 +27,8 @@ const Product = () => {
         <Grid>
             {products?.map((product) => (
                 (product._id === id) && (
-                    <Grid sx={{
+
+                    < Grid sx={{
                         display: 'flex',
                         flexDirection: 'row',
                         flexWrap: 'wrap',
@@ -64,11 +65,11 @@ const Product = () => {
                                 {product.description}
                             </Typography>
                             <CardContent sx={{ px: 0 }}>
-                                <Typography variant="body2" color="text.secondary" sx={{ fontWeight: '700' }}>
-                                    Price: Rs{product.price}
+                                <Typography variant="body2" color="text.secondary" sx={{ display: 'flex', alignItems: 'center', fontWeight: '700' }}>
+                                    Price: {' '}<CurrencyRupeeIcon sx={{ fontSize: '16px', fontWeight: '700' }} />{product.price}
                                 </Typography>
-                                <Typography variant="body2" color="text.secondary" sx={{ fontWeight: '700' }}>
-                                    Discount: Rs{product.discount}
+                                <Typography variant="body2" color="text.secondary" sx={{ display: 'flex', alignItems: 'center', fontWeight: '700' }}>
+                                    Discount: {' '}<CurrencyRupeeIcon sx={{ fontSize: '16px', fontWeight: '700' }} />{product.discountPercentage}
                                 </Typography>
                             </CardContent>
                             <CardContent sx={{ p: 0 }}>

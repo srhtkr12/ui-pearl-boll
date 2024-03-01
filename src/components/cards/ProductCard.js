@@ -6,7 +6,8 @@ import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Card, CardHeader, CardMedia, CardContent, CardActions, Collapse, Avatar, IconButton, Typography, Grid, Box } from '@mui/material';
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import { Card, CardHeader, CardMedia, CardContent, CardActions, Collapse, Avatar, IconButton, Typography } from '@mui/material';
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -70,12 +71,11 @@ const ProductCard = ({
                 </Typography>
             </CardContent>
             <CardContent>
-                <Typography variant="body2" color="text.secondary">
-                    Price: Rs{price}
+                <Typography variant="body2" color="text.secondary" sx={{ display: 'flex', alignItems: 'center' }}>
+                    Price: {' '}<CurrencyRupeeIcon sx={{ fontSize: '16px' }} />{price}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    Discount: Rs{discount}
-                </Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ display: 'flex', alignItems: 'center' }}>
+                    Discount:  {' '}<CurrencyRupeeIcon sx={{ fontSize: '16px' }} />{discount}</Typography>
             </CardContent>
             <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">

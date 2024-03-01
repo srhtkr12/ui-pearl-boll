@@ -2,15 +2,13 @@ import axios from 'axios';
 
 export const axiosApi = {
     local: axios.create({
-        baseURL: "http://localhost:5050/api/"
+        baseURL: "http://localhost:5050/api/",
+        withCredentials: true
     }),
     // remote: axios.create({
     //     baseURL: "https://www.yourwebsite.com/api/"
     // })
 }
-
-
-// console.log(axiosApi.defaults.baseURL)
 
 // axiosApi.local.defaults.headers.common[
 //     "Authorization"

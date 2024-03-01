@@ -1,33 +1,53 @@
-// AuthService.js
-import axios from 'axios';
+import { axiosApi } from './axios';
 import Cookies from 'js-cookie';
 
-const API_BASE_URL = 'https://your-api-url.com';
-
 export const AuthService = {
-    login: async (email, password) => {
-        try {
-            const response = await axios.post(`${API_BASE_URL}/login`, { email, password });
-            const { token } = response.data;
-            AuthService.setToken(token);
-            return true;
-        } catch (error) {
-            console.error('Login failed:', error);
-            return false;
-        }
-    },
-
     setToken: (token) => {
-        Cookies.set('token', token, { expires: 7 }); // Set the token in a cookie
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`; // Set the token in the Axios header
+        axiosApi.local.interceptors.request.use((configured) => {
+            if (token) {
+                configured.headers.Authorization = `Bearer ${token}`;
+            }
+            return configured;
+        }, error => {
+            return Promise.reject(error);
+        });
     },
-
     logout: () => {
+
+        console.log('mdsfsfa')
+        axiosApi.defaults.headers.common['Authorization'] = undefined;
+
+        // delete axiosApi.defaults.headers.common['Authorization'];
         Cookies.remove('token');
-        delete axios.defaults.headers.common['Authorization'];
     },
 
     isAuthenticated: () => {
         return !!Cookies.get('token');
     },
 };
+
+// export const AuthService = {
+//     setToken: async (token) => {
+//         await axiosApi.interceptors.request.use((configured) => {
+//             if (token) {
+//                 configured.headers.Authorization = `Bearer ${token}`;
+//             }
+//             return configured;
+//         }, (error) => {
+//             return Promise.reject(error);
+//         });
+//     },
+//     logout: async () => {
+//         try {
+//             await axiosApi.post('/logout');
+//         } catch (error) {
+//             console.log('error', error)
+//         } finally {
+//             delete axiosApi.defaults.headers.common['Authorization'];
+//             Cookies.remove('token');
+//         }
+//     },
+//     isAuthenticated: () => {
+//         return !!Cookies.get('token');
+//     },
+// };
